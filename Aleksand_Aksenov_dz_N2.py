@@ -32,9 +32,9 @@ def division_7(idx):
 def division_7_plus_17(idx):
     res = 0
     while idx != -1:
-        check_number = sum_numbers(numbers_cube[len_list] + 17)
+        check_number = sum_numbers(numbers_cube[idx] + 17)
         if check_number % 7 == 0:
-            res += numbers_cube[len_list]
+            res += numbers_cube[idx]
         idx += -1
     return res
 
