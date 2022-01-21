@@ -4,8 +4,8 @@ src = [300, 2, 12, 44, 1, 1, 4, 10, 7, 1, 78, 123, 55]
 result = [12, 44, 4, 10, 78, 123]
 """
 
-src = [300, 2, 12, 44, 1, 1, 4, 10, 7, 1, 78, 123, 55]
+src = [300, 2, 12, 44, 1, 1, 4, 10, 7, 1, 78, 123, 55, 77, 77, 77]
 
-result = [i for i in src[1:] if i > src[src.index(i)-1]]
+result = [v for i, v in list(enumerate(src[1:])) if v > src[i]]
+
 print(result)
-
