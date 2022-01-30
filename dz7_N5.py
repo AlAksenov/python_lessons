@@ -10,8 +10,8 @@
     }
 """
 
-
 import os
+import json
 
 
 def generate_dict_file_size(pth):
@@ -23,11 +23,11 @@ def generate_dict_file_size(pth):
             file_size = os.stat(os.path.join(root, file)).st_size
             key = 10 ** len(str(file_size))
             file_extension = os.path.splitext(file)[-1].replace('.', '')
-            count, extension = dict_file_sizes.get(key, (0, set()))
-            extension.add(file_extension)
+            count, extension = dict_file_sizes.get(key, (0, list()))
+            if file_extension not in extension:
+                extension.append(file_extension)
             count += 1
             dict_file_sizes[key] = (count, extension)
-
 
     # сортировка
     sorted_tuple = sorted(dict_file_sizes.items(), key=lambda x: x[0])
@@ -39,7 +39,10 @@ def generate_dict_file_size(pth):
 if __name__ == '__main__':
     # формируем путь к some_data
     path_data = root_dir = os.path.dirname(os.path.abspath(__file__)) + '/some_data'
-    print(generate_dict_file_size(path_data))
+    res = generate_dict_file_size(path_data)
 
-
-
+    with open('./out.txt', "w", encoding="utf-8") as out_file:
+        json.dump(dict(res), out_file)
+    # читаем записанный файл
+    with open('./out.txt', "r", encoding="utf-8") as out_file:
+        print(json.load(out_file))
